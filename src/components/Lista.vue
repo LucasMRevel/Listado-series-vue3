@@ -45,34 +45,31 @@ export default {
 
     const nuevaSerie = ref("");
 
-           const borrar_todo = async (index) =>{
-             await new Promise( (cancelar)=>{   
-            setTimeout( ()=>{
-              cancelar()
-            },100)
-          })
-            store.dispatch ('lista/borrar_todo', index) //USANDO DISPATCH
-           }
-          
-           const nueva_serie = async (nombre) =>{
-            store.dispatch ('lista/nueva_serie',{
-              nombre
-            }) 
-           }
+      const borrar_todo = async (index) =>{
+        store.dispatch ('lista/borrar_todo',{ 
+          index
+        })
+      }
+            
+      const nueva_serie = async (nombre) =>{
+        store.dispatch ('lista/nueva_serie',{
+          nombre
+        }) 
+      }
 
-             const colores = async (index) =>{
-             await new Promise( (aceptar)=>{   
-            setTimeout( ()=>{
-              aceptar()
-            }, 500)
-          })
-            store.dispatch ('lista/colores', index) //USANDO DISPATCH
-           }
+      const colores = async (index) =>{
+        await new Promise( (aceptar)=>{   
+				setTimeout( ()=>{
+					aceptar()
+				},100)
+			})
+        store.dispatch ('lista/colores', index)
+      }
 
-        let series = store.state.lista.series
+    let series = store.state.lista.series
 
-        return { series, nuevaSerie, nueva_serie, borrar_todo, colores}
-      }   
+    return { series, nuevaSerie, nueva_serie, borrar_todo, colores}
+  }   
 }
 </script>
 

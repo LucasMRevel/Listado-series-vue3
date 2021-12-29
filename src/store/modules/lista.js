@@ -45,7 +45,12 @@ export default {
 
 	actions:{
 
-		async borrar_todo({commit}, index){ //LO AGREGADO
+		async borrar_todo({commit}, index){
+			await new Promise( (cancelar)=>{   
+				setTimeout( ()=>{
+					cancelar()
+				},100)
+			}) 
 			commit('BORRAR_TODO', index)
 		},
 

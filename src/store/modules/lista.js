@@ -3,7 +3,8 @@ export default {
 	state: {
 		//contador: 0,
 		series: [],
-			nuevaSerie: ''
+			nuevaSerie: '',
+			title: 'llamado por getterrrrrrr'
 		
 	},
 
@@ -13,34 +14,34 @@ export default {
 			console.log(payload, "payload")
 			const serie = {
 				nombre: payload.nombre,
-				estado: false
-				
+				estado: false				
 			}
 			state.series.push(serie)
+			localStorage.setItem("guardarr", JSON.stringify(state.series))
 			state.nuevaSerie = '';
-			localStorage.setItem('series', JSON.stringify(state.series))
 			console.log(state.series)
 		},
 
 		COLORES_ETIQUETAS(state, index){
 			state.series[index].estado = true
-			localStorage.setItem('series', JSON.stringify(state.series))
+			localStorage.setItem("guardarr", JSON.stringify(state.series))
 		},
 
 		BORRAR_TODO(state, index){
 			state.series.splice(index, 1)
-			localStorage.setItem('series', JSON.stringify(state.series))
+			localStorage.setItem("guardarr", JSON.stringify(state.series))
 		},
 
 		GUARDAR_DATOS(state){
-			let guardarr = JSON.parse(localStorage.getItem('series'));
-			if (guardarr === null){
-				state.series = [];
+			let guardarr = localStorage.getItem("guardarr");
+
+			if (guardarr){
+				state.series = JSON.parse(guardarr)
+				return;
 			}
-			else{
-				state.series = guardarr;
-			}
-		}
+
+		},
+
 	},
 
 	actions:{
@@ -58,7 +59,7 @@ export default {
 			await new Promise( (aceptar)=>{   
 				setTimeout( ()=>{
 					aceptar()
-				},100)
+				},0)
 			})
 			commit('AGREGAR_SERIE', payload)       
 		},
@@ -67,9 +68,22 @@ export default {
 			commit('COLORES_ETIQUETAS', index)
 		},
 
+
+		/*async local ({commit}) {
+      commit('GUARDAR_DATOS');
+    },*/
 	},
 	getters: {
 
-	},
+		/*getVista: state => { return state.series.filter(real => real.estado) },*/
+			
+		title: state => state.series.nombre,
+
+		estado: state => state.series.filter(series => series.estado),
+		
+		estado2: (state, getters) => getters.estado.length
+	
+
+    },
 
 }

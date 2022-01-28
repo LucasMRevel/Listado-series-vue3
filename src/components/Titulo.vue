@@ -1,5 +1,5 @@
 <template>
-<div class= "text-center bg-dark p-2 text-dark bg-opacity-75" >
+<div class= "text-center bg-dark p-2 text-dark bg-opacity-100" >
   <img alt="Series logo" src="@/assets/series.jpg"  width="500" height="300">
   <br>
   <br>

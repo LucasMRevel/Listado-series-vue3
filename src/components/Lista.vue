@@ -1,6 +1,6 @@
 <template>
 
-  <div class="bg-dark p-2 text-dark bg-opacity-75">
+  <div class="bg-dark p-2 text-dark bg-opacity-100">
   <h3 class="text-white">Agregar series:</h3>
   <input type="text" placeholder="Escriba una serie" v-model="nuevaSerie" @keypress.enter="nueva_serie">
   <button type="button" class="btn btn-outline-success" @click="nueva_serie(nuevaSerie)"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
@@ -19,6 +19,11 @@
     <div class="text-center" v-if="estado2 >= 1">
       <h3 class="text-white">Series vistas: {{estado2}}</h3>
     </div>
+      <button type="button" class="btn btn-outline-success" @click="color2(index)"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
+        <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
+        <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
+        </svg> ¡¡Todo visto!!
+      </button>
     <li v-for="(serie, index) in series" :key ="serie"
       class="d-flex justify-content-between align-items-center" >
         <div role="alert" :class="['alert', serie.estado ? 'alert-success' : 'alert-danger']">
@@ -75,15 +80,17 @@ export default {
         $store.dispatch ('lista/colores', index)
       }
 
-      //let title = computed(() => $store.getters["lista/title"]) //NO OLVIDARRRRRR
+      const color2 = async (index) =>{
+        $store.dispatch ('lista/color2',{ 
+          index
+        })
+      }
 
-      //let estado = computed(() => $store.getters["lista/estado"])
+      let estado2 = computed(() => $store.getters["lista/estado2"]) //NO OLVIDARRRRR
 
-      let estado2 = computed(() => $store.getters["lista/estado2"])
+      let series = $store.state.lista.series  //NO OLVIDARRRRRR
 
-    let series = $store.state.lista.series  //NO OLVIDARRRRRR
-
-    return { series, nuevaSerie, nueva_serie, borrar_todo, colores, estado2} 
+    return { series, nuevaSerie, nueva_serie, borrar_todo, colores, estado2, color2} 
     
 
   },

@@ -4,7 +4,6 @@ export default {
 		//contador: 0,
 		series: [],
 			nuevaSerie: '',
-			title: 'llamado por getterrrrrrr'
 		
 	},
 
@@ -18,8 +17,9 @@ export default {
 			}
 			state.series.push(serie)
 			localStorage.setItem("guardarr", JSON.stringify(state.series))
-			state.nuevaSerie = '';
+			state.nuevaSerie = "";
 			console.log(state.series)
+			console.log(state.nuevaSerie)
 		},
 
 		COLORES_ETIQUETAS(state, index){
@@ -32,16 +32,17 @@ export default {
 			localStorage.setItem("guardarr", JSON.stringify(state.series))
 		},
 
+		TODO_VISTO(state){
+			state.series.forEach((serie) => serie.estado = true)
+		},
+
 		GUARDAR_DATOS(state){
 			let guardarr = localStorage.getItem("guardarr");
-
 			if (guardarr){
 				state.series = JSON.parse(guardarr)
 				return;
 			}
-
 		},
-
 	},
 
 	actions:{
@@ -59,7 +60,7 @@ export default {
 			await new Promise( (aceptar)=>{   
 				setTimeout( ()=>{
 					aceptar()
-				},0)
+				},50)
 			})
 			commit('AGREGAR_SERIE', payload)       
 		},
@@ -67,17 +68,19 @@ export default {
 		async colores({commit}, index){
 			commit('COLORES_ETIQUETAS', index)
 		},
+		
 
+		async color2({commit}, index){
+			await new Promise( (aceptar)=>{   
+				setTimeout( ()=>{
+					aceptar()
+				},50)
+			})
+			commit('TODO_VISTO', index)       
+		},
 
-		/*async local ({commit}) {
-      commit('GUARDAR_DATOS');
-    },*/
 	},
 	getters: {
-
-		/*getVista: state => { return state.series.filter(real => real.estado) },*/
-			
-		title: state => state.series.nombre,
 
 		estado: state => state.series.filter(series => series.estado),
 		

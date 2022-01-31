@@ -74,12 +74,14 @@ export default {
         $store.dispatch ('lista/borrar_todo',{ 
           index
         })
+        localStorage.setItem("guardarr", JSON.stringify(series))
       }
             
       const nueva_serie = async (nombre) =>{  // NO OLVIDARRRRRR  
         $store.dispatch ('lista/nueva_serie',{
           nombre
         }) 
+        localStorage.setItem("guardarr", JSON.stringify(series))
       }
 
       const colores = async (index) =>{
@@ -89,12 +91,14 @@ export default {
 				},100)
 			})
         $store.dispatch ('lista/colores', index)
+        localStorage.setItem("guardarr", JSON.stringify(series))
       }
 
       const color2 = async (index) =>{
         $store.dispatch ('lista/color2',{ 
           index
         })
+        localStorage.setItem("guardarr", JSON.stringify(series))
       }
 
       let estado2 = computed(() => $store.getters["lista/estado2"]) //NO OLVIDARRRRR

@@ -58,6 +58,17 @@ export default {
 
     const nuevaSerie = ref("");
 
+    onMounted(() =>{
+
+    if (localStorage.getItem('guardarr')) {
+		let guardarr = JSON.parse(window.localStorage.getItem('guardarr'));
+    guardarr.forEach(serie => {
+    series.push(serie)
+        });
+			}
+
+    })
+
 
       const borrar_todo = async (index) =>{
         $store.dispatch ('lista/borrar_todo',{ 

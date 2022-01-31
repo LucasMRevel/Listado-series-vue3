@@ -16,7 +16,6 @@ export default {
 				estado: false				
 			}
 			state.series.push(serie)
-			localStorage.setItem("guardarr", JSON.stringify(state.series))
 			state.nuevaSerie = "";
 			console.log(state.series)
 			console.log(state.nuevaSerie)
@@ -24,24 +23,14 @@ export default {
 
 		COLORES_ETIQUETAS(state, index){
 			state.series[index].estado = true
-			localStorage.setItem("guardarr", JSON.stringify(state.series))
 		},
 
 		BORRAR_TODO(state, index){
 			state.series.splice(index, 1)
-			localStorage.setItem("guardarr", JSON.stringify(state.series))
 		},
 
 		TODO_VISTO(state){
 			state.series.forEach((serie) => serie.estado = true)
-		},
-
-		GUARDAR_DATOS(state){
-			let guardarr = localStorage.getItem("guardarr");
-			if (guardarr){
-				state.series = JSON.parse(guardarr)
-				return;
-			}
 		},
 	},
 
@@ -84,7 +73,7 @@ export default {
 
 		estado: state => state.series.filter(series => series.estado),
 		
-		estado2: (state, getters) => getters.estado.length
+		estado2: (state, getters) => getters.estado.length,
 	
 
     },

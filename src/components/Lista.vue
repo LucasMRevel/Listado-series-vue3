@@ -21,9 +21,9 @@
         <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
         <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
         </svg> ¡¡Todo visto!!
-      </button>
+        </button>
         <h3 class="text-white">Series vistas: {{estado2}}</h3>
-          </div>
+    </div>
     <div class="mt-3 d-flex align-content-end flex-wrap d-flex justify-content-between">
       <div class="mt-3 d-flex justify-content-between w-25" v-for="(serie, index) in series" :key ="serie">
         <div role="alert" :class="['alert w-75', serie.estado ? 'alert-success' : 'alert-danger']">
@@ -67,9 +67,7 @@ export default {
     series.push(serie)
         });
 			}
-
     })
-
 
       const borrar_todo = async (index) =>{
         $store.dispatch ('lista/borrar_todo',{ 

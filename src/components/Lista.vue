@@ -22,11 +22,7 @@
         <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
         </svg> ¡¡Todo visto!!
       </button>
-    <li v-for="(serie, index) in series" :key ="serie"
-      class="d-flex justify-content-between align-items-center" >
-        <div role="alert" :class="['alert', serie.estado ? 'alert-success' : 'alert-danger']">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{index}}-{{serie.nombre}}</h5>
+        <h3 class="text-white">Series vistas: {{estado2}}</h3>
           </div>
     <div class="mt-3 d-flex align-content-end flex-wrap d-flex justify-content-between">
       <div class="mt-3 d-flex justify-content-between w-25" v-for="(serie, index) in series" :key ="serie">

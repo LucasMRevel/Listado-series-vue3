@@ -1,6 +1,6 @@
 <template>
 <div class= "text-center bg-dark p-2 text-dark bg-opacity-100" >
-  <img alt="Series logo" src="@/assets/series.jpg"  width="500" height="300">
+  <img alt="Series logo" src="@/assets/series.jpg"  width="1100" height="400">
   <br>
   <br>
   <h1 class="text-white">Lista de series </h1>

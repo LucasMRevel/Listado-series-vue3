@@ -16,21 +16,21 @@
       <br>
       <h5>No hay series para mostrar</h5>
     </div>
-    <div class="text-center" v-if="estado2 >= 1">
-      <h3 class="text-white">Series vistas: {{estado2}}</h3>
-    </div>
-      <button type="button" class="btn btn-outline-success" @click="color2(index)"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
+    <div class="d-flex justify-content-between" v-if="estado2 >= 1">
+      <button type="button" class="btn btn-outline-success w-25 mt-3" @click="color2(index)"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
         <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
         <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
         </svg> ¡¡Todo visto!!
-      </button>
-    <li v-for="(serie, index) in series" :key ="serie"
-      class="d-flex justify-content-between align-items-center" >
-        <div role="alert" :class="['alert', serie.estado ? 'alert-success' : 'alert-danger']">
-          <div class="d-flex w-100 justify-content-between">
+        </button>
+        <h3 class="text-white">Series vistas: {{estado2}}</h3>
+    </div>
+    <div class="mt-3 d-flex align-content-end flex-wrap d-flex justify-content-between">
+      <div class="mt-3 d-flex justify-content-between w-25" v-for="(serie, index) in series" :key ="serie">
+        <div role="alert" :class="['alert w-75', serie.estado ? 'alert-success' : 'alert-danger']">
+          <div class="d-flex w-100 justify-content-between aling-items-center">
             <h5 class="mb-1">{{index}}-{{serie.nombre}}</h5>
           </div>
-          <div class="d-flex justify-content-end">
+          <div class="mt-3 d-flex justify-content-evenly">
             <button type="button" class="btn btn-outline-success" @click="colores(index)"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
               <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/></svg>
             </button>
@@ -40,7 +40,8 @@
             </button>
           </div>
         </div>
-    </li>
+      </div>
+    </div>
   </div>
 	<br>
   <br>
@@ -66,9 +67,7 @@ export default {
     series.push(serie)
         });
 			}
-
     })
-
 
       const borrar_todo = async (index) =>{
         $store.dispatch ('lista/borrar_todo',{ 

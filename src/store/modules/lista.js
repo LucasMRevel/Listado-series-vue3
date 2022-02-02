@@ -59,7 +59,7 @@ export default {
 		},
 		
 
-		async color2({commit}, index){
+		async colorDefinitivo({commit}, index){
 			await new Promise( (aceptar)=>{   
 				setTimeout( ()=>{
 					aceptar()
@@ -73,7 +73,7 @@ export default {
 
 		estado: state => state.series.filter(series => series.estado),
 		
-		estado2: (state, getters) => getters.estado.length,
+		estadoDefinitivo: (state, getters) => getters.estado.length,
 	
 
     },

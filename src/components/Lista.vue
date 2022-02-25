@@ -9,7 +9,7 @@
     <br>
     <div v-if="series.length >= 1">
       <br>
-      <h5 class="text-white">Se agregaron: {{series.length}} series</h5>
+      <h5 class="text-white">Se agregaron: {{series.length}} series {{seriesIniciales}}</h5>
     </div>
   <div class="list-group">
     <div class= "text-white" v-if="series.length === 0">
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import {computed, onMounted, ref} from 'vue'
+import {computed, ref} from 'vue'   //onMounted
 import {useStore} from 'vuex'
 export default {
   name: 'Lista',
@@ -59,28 +59,27 @@ export default {
 
     const nuevaSerie = ref("");
 
-    onMounted(() =>{
+    /*onMounted(() =>{
 
     if (localStorage.getItem('guardarr')) {
 		let guardarr = JSON.parse(window.localStorage.getItem('guardarr'));
-    guardarr.forEach(serie => {
+
+    guardarr.forEach (serie => {
     series.push(serie)
         });
 			}
     })
-
+*/
       const borrar_todo = async (index) =>{
         $store.dispatch ('lista/borrar_todo',{ 
           index
         })
-        localStorage.setItem("guardarr", JSON.stringify(series))
       }
             
       const nueva_serie = async (nombre) =>{  // NO OLVIDARRRRRR  
         $store.dispatch ('lista/nueva_serie',{
           nombre
         }) 
-        localStorage.setItem("guardarr", JSON.stringify(series))
       }
 
       const colores = async (index) =>{
@@ -90,21 +89,37 @@ export default {
 				},100)
 			})
         $store.dispatch ('lista/colores', index)
-        localStorage.setItem("guardarr", JSON.stringify(series))
       }
 
       const colorDefinitivo = async (index) =>{
         $store.dispatch ('lista/colorDefinitivo',{ 
           index
         })
-        localStorage.setItem("guardarr", JSON.stringify(series))
       }
 
-      let estadoDefinitivo = computed(() => $store.getters["lista/estadoDefinitivo"]) //NO OLVIDARRRRR
+      const tomarSeries = async (getters) =>{
+        $store.dispatch ('localStorage/tomarGetter',{ 
+          getters
+        })
+      }
 
-      let series = $store.state.lista.series  //NO OLVIDARRRRRR
+      const seriesIniciales = computed (() => $store.getters["lista/series"]); 
 
-    return { series, nuevaSerie, nueva_serie, borrar_todo, colores, estadoDefinitivo, colorDefinitivo} 
+      const estadoDefinitivo = computed(() => $store.getters["lista/estadoDefinitivo"]); //NO OLVIDARRRRR
+
+      const series = $store.state.lista.series;  //NO OLVIDARRRRRR
+
+    return { 
+      series,
+      nuevaSerie,
+      nueva_serie,
+      borrar_todo,
+      colores,
+      estadoDefinitivo,
+      colorDefinitivo,
+      tomarSeries,
+      seriesIniciales,
+    } 
     
 
   },

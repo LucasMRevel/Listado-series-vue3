@@ -43,6 +43,7 @@
       </div>
     </div>
   </div>
+  <button type="button" class="btn btn-outline-danger" @click="tomarGetAll()"> mostrar</button>
 	<br>
   <br>
   </div>
@@ -97,9 +98,8 @@ export default {
         })
       }
 
-      const tomarSeries = async (getters) =>{
-        $store.dispatch ('localStorage/tomarGetter',{ 
-          getters
+      const tomarGetAll = async () =>{
+        $store.dispatch ('lista/tomarGetAll',{ 
         })
       }
 
@@ -117,8 +117,8 @@ export default {
       colores,
       estadoDefinitivo,
       colorDefinitivo,
-      tomarSeries,
       seriesIniciales,
+      tomarGetAll
     } 
     
 

@@ -1,9 +1,9 @@
+import SeriesServices from '@/services/series'
 
 const state = {
 		//contador: 0,
 		series: [],
-			nuevaSerie: '',
-		
+			nuevaSerie: '',	
 	}
 
 const mutations = {
@@ -18,23 +18,27 @@ const mutations = {
 			state.nuevaSerie = "";
 			console.log(state.series)
 			console.log(state.nuevaSerie)
-			//localStorage.setItem('lasSeries', JSON.stringify('localStorage/getStateDef'))
+			localStorage.setItem('lasSeries', JSON.stringify(state.series))
 		},
 
 	COLORES_ETIQUETAS(state, index){
 		state.series[index].estado = true
-			//localStorage.setItem('lasSeries', JSON.stringify('localStorage/getStateDef'))
+			localStorage.setItem('lasSeries', JSON.stringify(state.series))
 	},
 
 	BORRAR_TODO(state, index){
 		state.series.splice(index, 1)
-			//localStorage.setItem('lasSeries', JSON.stringify('localStorage/getStateDef'))
+			localStorage.setItem('lasSeries', JSON.stringify(state.series))
 	},
 
 	TODO_VISTO(state){
 		state.series.forEach((serie) => serie.estado = true)
-			//localStorage.setItem('lasSeries', JSON.stringify('localStorage/getStateDef'))
+			localStorage.setItem('lasSeries', JSON.stringify(state.series))
 	},
+
+	/*SET_STORAGE(state){
+		const series = state.series 
+	},*/
 }
 
 const actions={
@@ -61,7 +65,6 @@ const actions={
 		commit('COLORES_ETIQUETAS', index)
 	},
 		
-
 	async colorDefinitivo({commit}, index){
 		await new Promise( (aceptar)=>{   
 			setTimeout( ()=>{
@@ -70,6 +73,15 @@ const actions={
 		})
 		commit('TODO_VISTO', index)       
 	},
+
+	async tomarGetAll({commit}, payload){
+		const respueta = await SeriesServices.getAll()
+		//const guardar = localStorage.setItem ('lasSeries', JSON.stringify(state.series))
+		console.log('llega la respuesta', respueta)
+		//console.log("se guarda", guardar)
+		commit('AGREGAR_SERIE', payload)
+	}
+
 }
 
 const	getters= {
@@ -80,11 +92,7 @@ const	getters= {
 
 	title: state => state.title,
 
-		/*series: (state, rootGetters, root) =>{
-			console.log(root['localStorage'], rootGetters)
-			return root['localStorage/getItem', "lasSeries"]
-			
-		}*/
+	getState: state => state.series,
 }
 
 	export default {
